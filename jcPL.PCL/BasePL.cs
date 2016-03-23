@@ -1,4 +1,6 @@
-﻿namespace jcPL.PCL {
+﻿using System.Threading.Tasks;
+
+namespace jcPL.PCL {
     public abstract class BasePL {
         protected BasePS _persistantImplementation;
 
@@ -9,5 +11,9 @@
         public abstract T Get<T>(string key);
 
         public abstract bool Put<T>(string key, T obj);
+
+        public abstract Task<T> GetAsync<T>(string key);
+
+        public abstract Task<bool> PutAsync<T>(string key, T obj);
     }
 }

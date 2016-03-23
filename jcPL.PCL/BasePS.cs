@@ -4,9 +4,13 @@ using Newtonsoft.Json;
 
 namespace jcPL.PCL {
     public abstract class BasePS {
-        public abstract Task<T> Get<T>(string dataKey);
+        public abstract Task<T> GetAsync<T>(string dataKey);
 
-        public abstract Task<bool> Put<T>(string dataKey, T fileData, bool replaceExisting = true);
+        public abstract T Get<T>(string dataKey);
+
+        public abstract Task<bool> PutAsync<T>(string dataKey, T fileData, bool replaceExisting = true);
+
+        public abstract bool Put<T>(string dataKey, T fileData, bool replaceExisting = true);
 
         protected static byte[] GetBytesFromT<T>(T obj) {
             var jsonStr = GetJSONStringFromT(obj);

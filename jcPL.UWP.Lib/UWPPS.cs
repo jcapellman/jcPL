@@ -18,7 +18,7 @@ namespace jcPL.UWP.Lib {
 
         private StorageFolder SelectedStorageFolder => (_useRoaming ? ApplicationData.Current.RoamingFolder : ApplicationData.Current.LocalFolder);
 
-        public override async Task<T> Get<T>(string dataKey) {
+        public override async Task<T> GetAsync<T>(string dataKey) {
             var filesinFolder = await SelectedStorageFolder.GetFilesAsync();
 
             var file = filesinFolder.FirstOrDefault(a => a.Name == dataKey);
@@ -28,11 +28,15 @@ namespace jcPL.UWP.Lib {
             }
 
             var buffer = await FileIO.ReadBufferAsync(file);
-            
+
             return GetObjectFromBytes<T>(buffer.ToArray());
         }
 
-        public override async Task<bool> Put<T>(string dataKey, T fileData, bool replaceExisting = true) {
+        public override T Get<T>(string dataKey) {
+            throw new NotImplementedException();
+        }
+
+        public override async Task<bool> PutAsync<T>(string dataKey, T fileData, bool replaceExisting = true) {
             var data = GetBytesFromT(fileData);
 
             using (var stream = await SelectedStorageFolder.OpenStreamForWriteAsync(dataKey, (replaceExisting ? CreationCollisionOption.ReplaceExisting : CreationCollisionOption.OpenIfExists))) {
@@ -40,6 +44,10 @@ namespace jcPL.UWP.Lib {
             }
 
             return true;
+        }
+
+        public override bool Put<T>(string dataKey, T fileData, bool replaceExisting = true) {
+            throw new NotImplementedException();
         }
     }
 }

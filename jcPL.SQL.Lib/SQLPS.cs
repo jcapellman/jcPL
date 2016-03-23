@@ -12,7 +12,7 @@ namespace jcPL.SQL.Lib {
             _dbConnection = dbConnection;
         }
 
-        public override async Task<T> Get<T>(string dataKey) {
+        public override async Task<T> GetAsync<T>(string dataKey) {
             using (var sqlConn = new SqlConnection(_dbConnection)) {
                 await sqlConn.OpenAsync();
 
@@ -32,7 +32,15 @@ namespace jcPL.SQL.Lib {
             }
         }
 
-        public override Task<bool> Put<T>(string dataKey, T fileData, bool replaceExisting = true) {
+        public override T Get<T>(string dataKey) {
+            throw new NotImplementedException();
+        }
+
+        public override Task<bool> PutAsync<T>(string dataKey, T fileData, bool replaceExisting = true) {
+            throw new NotImplementedException();
+        }
+
+        public override bool Put<T>(string dataKey, T fileData, bool replaceExisting = true) {
             throw new NotImplementedException();
         }
     }

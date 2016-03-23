@@ -1,29 +1,29 @@
-﻿using System.Collections.Generic;
+﻿using System.Threading.Tasks;
 
 using Newtonsoft.Json;
 
 namespace jcPL.PCL.Implementations {
     public class JSONPL : BasePL {
-        private readonly Dictionary<string, string> _values;
-
-        public JSONPL(BasePS persistantImplementation) : base(persistantImplementation) {
-            _values = new Dictionary<string, string>();
-        }
+        public JSONPL(BasePS persistantImplementation) : base(persistantImplementation) { }
          
         public override T Get<T>(string key) {
-            return !_values.ContainsKey(key) ? default(T) : JsonConvert.DeserializeObject<T>(_values[key]);
+            return JsonConvert.DeserializeObject<T>(_persistantImplementation.Get<string>(key));
         }
 
         public override bool Put<T>(string key, T obj) {
             var jsonObj = JsonConvert.SerializeObject(obj);
 
-            if (_values.ContainsKey(key)) {
-                _values[key] = jsonObj;
-            } else {
-                _values.Add(key, jsonObj);
-            }
+            return _persistantImplementation.Put(key, jsonObj);
+        }
 
-            return true;
+        public override async Task<T> GetAsync<T>(string key) {
+            return JsonConvert.DeserializeObject<T>(await _persistantImplementation.GetAsync<string>(key));
+        }
+
+        public override async Task<bool> PutAsync<T>(string key, T obj) {
+            var jsonObj = JsonConvert.SerializeObject(obj);
+
+            return await _persistantImplementation.PutAsync(key, jsonObj);
         }
     }
 }
