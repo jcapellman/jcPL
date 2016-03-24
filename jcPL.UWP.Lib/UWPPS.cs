@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Windows.Storage;
 
 using jcPL.PCL;
+using jcPL.PCL.Transports;
 
 namespace jcPL.UWP.Lib {
     public class UWPPS : BasePS {
@@ -18,21 +19,21 @@ namespace jcPL.UWP.Lib {
 
         private StorageFolder SelectedStorageFolder => (_useRoaming ? ApplicationData.Current.RoamingFolder : ApplicationData.Current.LocalFolder);
 
-        public override async Task<T> GetAsync<T>(string dataKey) {
+        public override async Task<ReturnSet<T>> GetAsync<T>(string dataKey) {
             var filesinFolder = await SelectedStorageFolder.GetFilesAsync();
 
             var file = filesinFolder.FirstOrDefault(a => a.Name == dataKey);
 
             if (file == null) {
-                return default(T);
+                return new ReturnSet<T>();
             }
 
             var buffer = await FileIO.ReadBufferAsync(file);
 
-            return GetObjectFromBytes<T>(buffer.ToArray());
+            return new ReturnSet<T>(GetObjectFromBytes<T>(buffer.ToArray()));
         }
 
-        public override T Get<T>(string dataKey) {
+        public override ReturnSet<T> Get<T>(string dataKey) {
             throw new NotImplementedException();
         }
 

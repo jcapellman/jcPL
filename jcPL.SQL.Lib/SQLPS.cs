@@ -3,6 +3,7 @@ using System.Data.SqlClient;
 using System.Threading.Tasks;
 
 using jcPL.PCL;
+using jcPL.PCL.Transports;
 
 namespace jcPL.SQL.Lib {
     public class SQLPS : BasePS {
@@ -12,7 +13,7 @@ namespace jcPL.SQL.Lib {
             _dbConnection = dbConnection;
         }
 
-        public override async Task<T> GetAsync<T>(string dataKey) {
+        public override async Task<ReturnSet<T>> GetAsync<T>(string dataKey) {
             using (var sqlConn = new SqlConnection(_dbConnection)) {
                 await sqlConn.OpenAsync();
 
@@ -28,11 +29,11 @@ namespace jcPL.SQL.Lib {
 
                 sqlConn.Close();
 
-                return obj;
+                return new ReturnSet<T>(obj);
             }
         }
 
-        public override T Get<T>(string dataKey) {
+        public override ReturnSet<T> Get<T>(string dataKey) {
             throw new NotImplementedException();
         }
 

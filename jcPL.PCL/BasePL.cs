@@ -1,5 +1,7 @@
 ﻿using System.Threading.Tasks;
 
+using jcPL.PCL.Transports;
+
 namespace jcPL.PCL {
     public abstract class BasePL {
         protected BasePS _persistantImplementation;
@@ -8,11 +10,11 @@ namespace jcPL.PCL {
             _persistantImplementation = persistantImplementation;
         }
 
-        public abstract T Get<T>(string key);
+        public abstract ReturnSet<T> Get<T>(string key);
 
         public abstract bool Put<T>(string key, T obj);
 
-        public abstract Task<T> GetAsync<T>(string key);
+        public abstract Task<ReturnSet<T>> GetAsync<T>(string key);
 
         public abstract Task<bool> PutAsync<T>(string key, T obj);
     }

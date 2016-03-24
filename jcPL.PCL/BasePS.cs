@@ -1,12 +1,12 @@
 ﻿using System.Threading.Tasks;
-
+using jcPL.PCL.Transports;
 using Newtonsoft.Json;
 
 namespace jcPL.PCL {
     public abstract class BasePS {
-        public abstract Task<T> GetAsync<T>(string dataKey);
+        public abstract Task<ReturnSet<T>> GetAsync<T>(string dataKey);
 
-        public abstract T Get<T>(string dataKey);
+        public abstract ReturnSet<T> Get<T>(string dataKey);
 
         public abstract Task<bool> PutAsync<T>(string dataKey, T fileData, bool replaceExisting = true);
 

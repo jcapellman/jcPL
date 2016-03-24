@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "jcPL.SQL.Lib", "jcPL.SQL.Li
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "jcPL.ASPNET.Lib", "jcPL.ASPNET.Lib\jcPL.ASPNET.Lib.csproj", "{CEB133E1-A0CB-4A40-A53C-989ADA3B5455}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "jcPL.UnitTests.MVC", "jcPL.UnitTests.MVC\jcPL.UnitTests.MVC.csproj", "{BDB8A068-0C63-4E6C-A668-A964B188CFE8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -87,6 +89,22 @@ Global
 		{CEB133E1-A0CB-4A40-A53C-989ADA3B5455}.Release|x64.Build.0 = Release|Any CPU
 		{CEB133E1-A0CB-4A40-A53C-989ADA3B5455}.Release|x86.ActiveCfg = Release|Any CPU
 		{CEB133E1-A0CB-4A40-A53C-989ADA3B5455}.Release|x86.Build.0 = Release|Any CPU
+		{BDB8A068-0C63-4E6C-A668-A964B188CFE8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BDB8A068-0C63-4E6C-A668-A964B188CFE8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BDB8A068-0C63-4E6C-A668-A964B188CFE8}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{BDB8A068-0C63-4E6C-A668-A964B188CFE8}.Debug|ARM.Build.0 = Debug|Any CPU
+		{BDB8A068-0C63-4E6C-A668-A964B188CFE8}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{BDB8A068-0C63-4E6C-A668-A964B188CFE8}.Debug|x64.Build.0 = Debug|Any CPU
+		{BDB8A068-0C63-4E6C-A668-A964B188CFE8}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{BDB8A068-0C63-4E6C-A668-A964B188CFE8}.Debug|x86.Build.0 = Debug|Any CPU
+		{BDB8A068-0C63-4E6C-A668-A964B188CFE8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BDB8A068-0C63-4E6C-A668-A964B188CFE8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BDB8A068-0C63-4E6C-A668-A964B188CFE8}.Release|ARM.ActiveCfg = Release|Any CPU
+		{BDB8A068-0C63-4E6C-A668-A964B188CFE8}.Release|ARM.Build.0 = Release|Any CPU
+		{BDB8A068-0C63-4E6C-A668-A964B188CFE8}.Release|x64.ActiveCfg = Release|Any CPU
+		{BDB8A068-0C63-4E6C-A668-A964B188CFE8}.Release|x64.Build.0 = Release|Any CPU
+		{BDB8A068-0C63-4E6C-A668-A964B188CFE8}.Release|x86.ActiveCfg = Release|Any CPU
+		{BDB8A068-0C63-4E6C-A668-A964B188CFE8}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
