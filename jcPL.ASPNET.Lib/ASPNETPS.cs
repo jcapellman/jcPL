@@ -32,5 +32,30 @@ namespace jcPL.ASPNET.Lib {
 
             return true;
         }
+
+        private Guid generateUniqueGuid() {
+            var unique = false;
+            var tmpGuid = Guid.NewGuid();
+
+            do {
+                if (!_cache.Contains(tmpGuid.ToString())) {
+                    unique = true;
+                } else {
+                    tmpGuid = Guid.NewGuid();
+                }               
+            } while (!unique);
+
+            return tmpGuid;            
+        }
+
+        public override Guid Put<T>(T fileData) {
+            var returnGuid = generateUniqueGuid();
+
+            Put(returnGuid.ToString(), fileData);
+
+            return returnGuid;
+        }
+
+        public override Task<Guid> PutAsync<T>(T fileData) { throw new NotImplementedException(); }
     }
 }

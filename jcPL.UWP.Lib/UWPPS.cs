@@ -50,5 +50,34 @@ namespace jcPL.UWP.Lib {
         public override bool Put<T>(string dataKey, T fileData, bool replaceExisting = true) {
             throw new NotImplementedException();
         }
+
+        private async Task<Guid> generateUniqueGuid() {
+            var filesinFolder = await SelectedStorageFolder.GetFilesAsync();
+
+            var unique = false;
+            var tmpGuid = Guid.NewGuid();
+
+            do {
+                var file = filesinFolder.FirstOrDefault(a => a.Name == tmpGuid.ToString());
+
+                if (file == null) {
+                    unique = true;
+                } else {
+                    tmpGuid = Guid.NewGuid();
+                }
+            } while (!unique);
+
+            return tmpGuid;
+        }
+
+        public override Guid Put<T>(T fileData) { throw new NotImplementedException(); }
+
+        public override async Task<Guid> PutAsync<T>(T fileData) {
+            var returnGuid = await generateUniqueGuid();
+
+            var result = await PutAsync(returnGuid.ToString(), fileData);
+
+            return returnGuid;
+        }
     }
 }

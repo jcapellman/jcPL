@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 
 using jcPL.PCL.Transports;
 
@@ -14,10 +15,8 @@ namespace jcPL.PCL.Implementations {
             return !result.HasValue ? new ReturnSet<T>() : new ReturnSet<T>(JsonConvert.DeserializeObject<T>(result.Value));
         }
 
-        public override bool Put<T>(string key, T obj) {
-            var jsonObj = JsonConvert.SerializeObject(obj);
-
-            return _persistantImplementation.Put(key, jsonObj);
+        public override bool Put<T>(string key, T obj) {            
+            return _persistantImplementation.Put(key, SerializeObject(obj));
         }
 
         public override async Task<ReturnSet<T>> GetAsync<T>(string key) {
@@ -26,10 +25,14 @@ namespace jcPL.PCL.Implementations {
             return !result.HasValue ? new ReturnSet<T>() : new ReturnSet<T>(JsonConvert.DeserializeObject<T>(result.Value));
         }
 
-        public override async Task<bool> PutAsync<T>(string key, T obj) {
-            var jsonObj = JsonConvert.SerializeObject(obj);
+        private string SerializeObject<T>(T obj) => JsonConvert.SerializeObject(obj);                     
 
-            return await _persistantImplementation.PutAsync(key, jsonObj);
+        public override async Task<bool> PutAsync<T>(string key, T obj) {            
+            return await _persistantImplementation.PutAsync(key, SerializeObject(obj));
         }
+
+        public override async Task<Guid> PutAsync<T>(T obj) => await _persistantImplementation.PutAsync(SerializeObject(obj));
+
+        public override Guid Put<T>(T obj) => _persistantImplementation.Put(SerializeObject(obj));
     }
 }

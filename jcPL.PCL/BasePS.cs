@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using jcPL.PCL.Transports;
 using Newtonsoft.Json;
 
@@ -11,6 +12,10 @@ namespace jcPL.PCL {
         public abstract Task<bool> PutAsync<T>(string dataKey, T fileData, bool replaceExisting = true);
 
         public abstract bool Put<T>(string dataKey, T fileData, bool replaceExisting = true);
+
+        public abstract Guid Put<T>(T fileData);
+
+        public abstract Task<Guid> PutAsync<T>(T fileData);
 
         protected static byte[] GetBytesFromT<T>(T obj) {
             var jsonStr = GetJSONStringFromT(obj);

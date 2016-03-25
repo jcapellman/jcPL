@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 
 using jcPL.PCL.Transports;
 
@@ -17,5 +18,9 @@ namespace jcPL.PCL {
         public abstract Task<ReturnSet<T>> GetAsync<T>(string key);
 
         public abstract Task<bool> PutAsync<T>(string key, T obj);
+
+        public abstract Task<Guid> PutAsync<T>(T obj);
+
+        public abstract Guid Put<T>(T obj);
     }
 }

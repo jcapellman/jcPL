@@ -44,5 +44,9 @@ namespace jcPL.SQL.Lib {
         public override bool Put<T>(string dataKey, T fileData, bool replaceExisting = true) {
             throw new NotImplementedException();
         }
+
+        public override Guid Put<T>(T fileData) { throw new NotImplementedException(); }
+
+        public override Task<Guid> PutAsync<T>(T fileData) { throw new NotImplementedException(); }
     }
 }
