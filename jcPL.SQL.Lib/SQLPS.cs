@@ -8,9 +8,32 @@ using jcPL.PCL.Transports;
 namespace jcPL.SQL.Lib {
     public class SQLPS : BasePS {
         private readonly string _dbConnection;
+        private static bool _tableVerified = false;
 
         public SQLPS(string dbConnection) {
             _dbConnection = dbConnection;
+
+            if (!_tableVerified) {
+                checkTableSchema();
+            }
+        }
+
+        private async void checkTableSchema() {
+            using (var sqlConn = new SqlConnection(_dbConnection)) {
+                await sqlConn.OpenAsync();
+
+                var sqlCommand = new SqlCommand("SELECT TOP 1 * FROM dbo.jcPL", sqlConn);
+
+                var executeReader = await sqlCommand.ExecuteReaderAsync();
+
+                if (executeReader.FieldCount == 0) {
+                    sqlCommand = new SqlCommand("CREATE TABLE dbo.jcPL");
+
+                    await sqlCommand.ExecuteNonQueryAsync();
+                }
+
+                _tableVerified = true;
+            }
         }
 
         public override async Task<ReturnSet<T>> GetAsync<T>(string dataKey) {
