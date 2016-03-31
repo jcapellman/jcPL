@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data;
 using System.Data.SqlClient;
 using System.Threading.Tasks;
 
@@ -21,13 +22,11 @@ namespace jcPL.SQL.Lib {
         private async void checkTableSchema() {
             using (var sqlConn = new SqlConnection(_dbConnection)) {
                 await sqlConn.OpenAsync();
+                
+                var tableCheck = sqlConn.GetSchema("TABLES", new[] { null, null, "jcPL" });
 
-                var sqlCommand = new SqlCommand("SELECT TOP 1 * FROM dbo.jcPL", sqlConn);
-
-                var executeReader = await sqlCommand.ExecuteReaderAsync();
-
-                if (executeReader.FieldCount == 0) {
-                    sqlCommand = new SqlCommand("CREATE TABLE dbo.jcPL");
+                if (tableCheck.Rows.Count == 0) {
+                    var sqlCommand = new SqlCommand("CREATE TABLE dbo.jcPL");
 
                     await sqlCommand.ExecuteNonQueryAsync();
                 }

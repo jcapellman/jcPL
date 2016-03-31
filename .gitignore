@@ -1,3 +1,7 @@
 .vs/
 bin/
 obj/
+/Release
+/NuGet
+/jcPL.UnitTests.UWP
+/jcPL.UWP.Lib
