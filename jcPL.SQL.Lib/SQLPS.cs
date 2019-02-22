@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Data;
 using System.Data.SqlClient;
 using System.Threading.Tasks;
-
-using jcPL.PCL;
-using jcPL.PCL.Transports;
 
 namespace jcPL.SQL.Lib {
     public class SQLPS : BasePS {
